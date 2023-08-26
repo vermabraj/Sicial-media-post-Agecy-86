@@ -18,14 +18,11 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
 
-interface Props {
-  children: React.ReactNode;
-}
+const Links = ["POST", "TOP-5", "Team"];
 
-const Links = ["Dashboard", "Projects", "Team"];
-
-const NavLink = (props: Props) => {
+const NavLink = (props) => {
   const { children } = props;
 
   return (
@@ -50,7 +47,14 @@ export default function Navbar() {
 
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4} position={"fixed"} width={"100%"}>
+      <Box
+        bg={useColorModeValue("gray.100", "gray.900")}
+        px={4}
+        position={"fixed"}
+        width={"100%"}
+        border={"1px solid silver"}
+        zIndex={"5"}
+      >
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
             size={"md"}
@@ -60,11 +64,16 @@ export default function Navbar() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={"center"}>
-            <Box>Agency-86</Box>
+            <Link to="/">
+              <Box fontWeight={"extrabold"} textTransform={"uppercase"}>
+                Agency-86
+              </Box>
+            </Link>
             <HStack
               as={"nav"}
               spacing={4}
               display={{ base: "none", md: "flex" }}
+              fontWeight={"bold"}
             >
               {Links.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
